@@ -110,9 +110,9 @@ const SalesScreen = () => {
                     </TouchableOpacity>
                     <DataTable>
                         <DataTable.Header >
-                            <DataTable.Title textStyle={styles.invoiceTableHeaderText}>Invoice No.</DataTable.Title>
-                            <DataTable.Title textStyle={styles.invoiceTableHeaderText} numeric>Amount</DataTable.Title>
-                            <DataTable.Title textStyle={styles.invoiceTableHeaderText} numeric>Date</DataTable.Title>
+                            <DataTable.Title textStyle={styles.salesTableHeaderText}>sales No.</DataTable.Title>
+                            <DataTable.Title textStyle={styles.salesTableHeaderText} numeric>Amount</DataTable.Title>
+                            <DataTable.Title textStyle={styles.salesTableHeaderText} numeric>Date</DataTable.Title>
                         </DataTable.Header>
 
                         {items.slice(from, to).map((item) => (
@@ -149,7 +149,7 @@ const SalesScreen = () => {
                         >
                             <View style={styles.bottomSheetModalContainer}>
 
-                                <Text style={styles.flexFilterLabel}>Filter Invoices</Text>
+                                <Text style={styles.flexFilterLabel}>Filter Sales</Text>
                                 <View style={styles.bottomSheetContent}>
                                     <DatePickerInput
                                         locale="en"
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 10,
     },
-    invoiceTableHeaderText: {
+    salesTableHeaderText: {
         fontSize: 16,
         fontWeight: 'bold'
     },
