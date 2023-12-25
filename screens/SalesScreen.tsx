@@ -10,6 +10,8 @@ import {
     BottomSheetBackdrop
 } from '@gorhom/bottom-sheet';
 import { BottomSheetDefaultBackdropProps } from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types';
+import { DatePickerInput } from 'react-native-paper-dates';
+
 const SalesScreen = () => {
     const navigation = useNavigation<NativeStackNavigationProp<RootStackNavigationType, 'Products'>>();
     const [page, setPage] = React.useState<number>(0);
@@ -17,7 +19,7 @@ const SalesScreen = () => {
     const [itemsPerPage, onItemsPerPageChange] = React.useState(
         numberOfItemsPerPageList[0]
     );
-
+    const [dateFilter, setDateFilter] = React.useState<{ startDate: Date | undefined, endDate: Date | undefined }>({ startDate: undefined, endDate: undefined });
     const dateFilterBottomSheetRef = React.useRef<BottomSheetModal>(null);
     const snapPoints = React.useMemo(() => ['25%'], []);
 
@@ -136,21 +138,48 @@ const SalesScreen = () => {
                         />
                     </DataTable>
                     <View style={styles.container}>
-                        <Button
-                            onPress={handlePresentModalPress}
-                            title="Present Modal"
-                            color="black"
-                        />
+
                         <BottomSheetModal
                             ref={dateFilterBottomSheetRef}
                             index={0}
                             snapPoints={snapPoints}
                             onChange={handleSheetChanges}
                             backdropComponent={renderBackdrop}
+
                         >
-                            <View>
-                                <Text>Awesome 🎉</Text>
+                            <View style={styles.bottomSheetModalContainer}>
+
+                                <Text style={styles.flexFilterLabel}>Filter Invoices</Text>
+                                <View style={styles.bottomSheetContent}>
+                                    <DatePickerInput
+                                        locale="en"
+                                        label="Start Date"
+                                        value={dateFilter.startDate}
+                                        onChange={(d) => setDateFilter({ ...dateFilter, startDate: d })}
+                                        inputMode="start"
+                                        style={{ width: 200 }}
+                                        withDateFormatInLabel={false}
+
+                                        mode="outlined"
+                                    />
+                                    <DatePickerInput
+                                        locale="en"
+                                        label="End Date"
+                                        value={dateFilter.startDate}
+                                        onChange={(d) => setDateFilter({ ...dateFilter, endDate: d })}
+                                        inputMode="start"
+                                        style={{ width: 200 }}
+                                        withDateFormatInLabel={false}
+
+
+                                        mode="outlined"
+                                    />
+                                </View>
+                                <TouchableOpacity style={styles.filterActionButton} >
+                                    <Text> Filter </Text>
+                                </TouchableOpacity>
                             </View>
+
                         </BottomSheetModal>
                     </View>
 
@@ -170,15 +199,43 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold'
     },
+    bottomSheetContent: {
+        flexDirection: 'row',
+        columnGap: 10
+
+    },
+    bottomSheetModalContainer: {
+        justifyContent: 'center',
+        paddingHorizontal: 10,
+        flex: 1,
+        alignItems: 'center',
+        rowGap: 12
+
+    },
+    flexFilterLabel:{
+        alignSelf:'flex-start',
+        fontSize: 16,
+    },
+    filterActionButton: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 1,
+        width: "50%",
+        alignSelf: 'center',
+        borderRadius: 5,
+        height: 40
+
+    },
+
     filterButton: {
         borderWidth: 1,
         borderColor: 'black',
-        width:70,
-        height:24,
-        borderRadius:5,
-        justifyContent:'center',
-        alignItems:'center',
-        alignSelf:'flex-end'
+        width: 70,
+        height: 24,
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'flex-end'
     },
     analytics: {
         flexDirection: 'row',

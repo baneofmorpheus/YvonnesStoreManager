@@ -8,7 +8,10 @@ import {
   BottomSheetModalProvider,
 } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { enGB,en, registerTranslation } from 'react-native-paper-dates'
 
+registerTranslation('en-GB', enGB)
+registerTranslation('en', en)
 export default function App() {
   return (
     <PaperProvider>
