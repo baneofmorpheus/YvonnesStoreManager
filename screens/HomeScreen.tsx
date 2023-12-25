@@ -1,8 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackNavigationType } from '../navigation/RootStackNavigation';
-import { Text, View, StyleSheet, SafeAreaView, Button, TouchableOpacity, ScrollView } from 'react-native';
-import { Ionicons, Entypo, MaterialIcons, FontAwesome, AntDesign, Feather } from "@expo/vector-icons"
+import { Text, View, StyleSheet, SafeAreaView,  ScrollView } from 'react-native';
+import { Entypo } from "@expo/vector-icons"
 import TileCard from '../components/cards/TileCard';
 
 
@@ -30,6 +30,10 @@ const HomeScreen = () => {
                             component: 'MaterialIcons'
                         }
                         }
+                        buttonCallBack={
+                            () =>
+                                navigation.navigate('Sales', { name: 'Janeo' })
+                        }
 
                         style={styles.tileChild}
 
@@ -45,6 +49,10 @@ const HomeScreen = () => {
 
                         }
                         }
+                        buttonCallBack={
+                            () =>
+                                navigation.navigate('Sales', { name: 'Janeo' })
+                        }
 
 
                     />
@@ -58,6 +66,10 @@ const HomeScreen = () => {
 
                         }
                         }
+                        buttonCallBack={
+                            () =>
+                                navigation.navigate('Sales', { name: 'Janeo' })
+                        }
 
 
                     />
@@ -70,6 +82,10 @@ const HomeScreen = () => {
                             style: { marginLeft: -5 },
 
                         }
+                        }
+                        buttonCallBack={
+                            () =>
+                                navigation.navigate('Sales', { name: 'Janeo' })
                         }
 
 
@@ -92,11 +108,11 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     greetingIconContainer: {
-       flexDirection:'row',
-       alignItems: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
-    userName:{
-        fontSize:20
+    userName: {
+        fontSize: 20
     },
     tileParent: {
         flexDirection: 'row',

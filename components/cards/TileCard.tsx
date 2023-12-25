@@ -12,25 +12,25 @@ interface TitleProps {
     countLabel: string,
     icon: IconProps,
     style?: StyleProp<ViewStyle>,
+    buttonCallBack: () => void
 
 }
 
-const TileCard: React.FC<TitleProps> = ({ title, dataCount, countLabel, icon,style }) => {
+const TileCard: React.FC<TitleProps> = ({ title, dataCount, countLabel, icon, style, buttonCallBack }) => {
     const navigation = useNavigation<NativeStackNavigationProp<RootStackNavigationType, 'Home'>>();
     return (
-        <View style={{ ...styles.tileItem,...style as object }} >
+        <View style={{ ...styles.tileItem, ...style as object }} >
 
 
             <View>
                 <TouchableOpacity style={styles.button} onPress={
-                    () =>
-                        navigation.navigate('Products', { name: 'Janeo' })
+                    buttonCallBack
 
                 }>
                     <Ionicons name="arrow-forward-outline" size={17} color="black" />
                 </TouchableOpacity>
 
-                <DynamicIcon size={40} name={icon.name} component={icon.component} style={{ alignSelf: 'flex-start',  ...(icon.style as object) }} />
+                <DynamicIcon size={40} name={icon.name} component={icon.component} style={{ alignSelf: 'flex-start', ...(icon.style as object) }} />
                 <Text style={styles.tileTitle}>{title}</Text>
             </View>
 

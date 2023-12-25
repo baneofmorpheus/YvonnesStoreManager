@@ -1,6 +1,7 @@
 import * as React from 'react';
 import HomeScreen from '../screens/HomeScreen';
 import ProductsScreen from '../screens/ProductsScreen';
+import SalesScreen from '../screens/SalesScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { Ionicons, Entypo, MaterialIcons,FontAwesome,AntDesign,Feather } from "@expo/vector-icons"
@@ -43,7 +44,7 @@ const RootStackNavigation = () => {
                 }
                 }
 
-                component={ProductsScreen} />
+                component={SalesScreen} />
             < Stack.Screen name="Products"
 
                 options={{
