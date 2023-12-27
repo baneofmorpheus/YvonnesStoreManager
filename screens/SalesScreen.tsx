@@ -110,7 +110,7 @@ const SalesScreen = () => {
                     </TouchableOpacity>
                     <DataTable>
                         <DataTable.Header >
-                            <DataTable.Title textStyle={styles.salesTableHeaderText}>sales No.</DataTable.Title>
+                            <DataTable.Title textStyle={styles.salesTableHeaderText}>Sales No.</DataTable.Title>
                             <DataTable.Title textStyle={styles.salesTableHeaderText} numeric>Amount</DataTable.Title>
                             <DataTable.Title textStyle={styles.salesTableHeaderText} numeric>Date</DataTable.Title>
                         </DataTable.Header>
