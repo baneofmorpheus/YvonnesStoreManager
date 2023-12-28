@@ -4,7 +4,8 @@ import ProductsScreen from '../screens/ProductsScreen';
 import SalesScreen from '../screens/SalesScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Ionicons, Entypo, MaterialIcons,FontAwesome,AntDesign,Feather } from "@expo/vector-icons"
+import { Ionicons, Entypo, MaterialIcons, FontAwesome, AntDesign, Feather } from "@expo/vector-icons"
+import SettingsScreen from '../screens/SettingsScreen';
 export type RootStackNavigationType = {
     Products: { name: string };
     Home: { name: string };
@@ -19,7 +20,7 @@ const RootStackNavigation = () => {
     return (
         <Stack.Navigator initialRouteName="Home"
             screenOptions={{
-                tabBarStyle: { marginBottom: 3,padding:10 },
+                tabBarStyle: { marginBottom: 3, padding: 10 },
                 tabBarLabelStyle: { fontSize: 12 },
                 headerShown: false
             }}
@@ -64,7 +65,7 @@ const RootStackNavigation = () => {
                 }
                 }
 
-                component={ProductsScreen} />
+                component={SettingsScreen} />
         </Stack.Navigator>
     );
 };

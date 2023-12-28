@@ -34,37 +34,37 @@ const ProductsScreen = () => {
     const [items] = React.useState([
         {
             key: 1,
-            name: 'Cupcake',
+            name: '112',
             calories: 356,
             fat: 16,
         },
         {
             key: 2,
-            name: 'Eclair',
+            name: '112',
             calories: 262,
             fat: 16,
         },
         {
             key: 3,
-            name: 'Frozen yogurt',
+            name: '112',
             calories: 159,
             fat: 6,
         },
         {
             key: 4,
-            name: 'Gingerbread',
+            name: '112',
             calories: 305,
             fat: 3.7,
         },
         {
             key: 5,
-            name: 'Frozen yogurt',
+            name: '112',
             calories: 159,
             fat: 6,
         },
         {
             key: 6,
-            name: 'Gingerbread',
+            name: '112',
             calories: 305,
             fat: 3.7,
         },
