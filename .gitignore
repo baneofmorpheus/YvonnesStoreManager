@@ -8,6 +8,10 @@ node_modules/
 dist/
 web-build/
 
+
+#Config Files
+google-services.json
+
 # Native
 *.orig.*
 *.jks

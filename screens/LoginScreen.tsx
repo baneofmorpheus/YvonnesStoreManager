@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackNavigationType } from '../navigation/RootStackNavigation';
-import { Text, View, StyleSheet, SafeAreaView,  ScrollView } from 'react-native';
+import { Text, View, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 import { Entypo } from "@expo/vector-icons"
 import TileCard from '../components/cards/TileCard';
 
@@ -11,7 +11,26 @@ const LoginScreen = () => {
     return (
         <SafeAreaView style={styles.container} >
             <ScrollView contentContainerStyle={styles.scrollView} >
-                <Text>Login</Text>
+                
+                <Text style={styles.appName}>Yvonne's Store Management</Text>
+
+                <View style={styles.authParent}>
+                    <Text style={styles.greeting}>Welcome</Text>
+
+                    <TouchableOpacity style={styles.loginOption}>
+
+                        <Text>Login  With Google</Text>
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity style={styles.supportLabel}>
+
+                        <Text>Need Help?</Text>
+                    </TouchableOpacity>
+
+                </View>
+
+                
+       
             </ScrollView>
         </SafeAreaView>
 
@@ -23,16 +42,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 10,
+        paddingVertical: 50,
     },
-    greetingContainer: {
-        marginBottom: 20,
-    },
-    greetingIconContainer: {
-        flexDirection: 'row',
+
+    loginOption: {
+        borderWidth: 1,
+        height: 40,
+        justifyContent: 'center',
         alignItems: 'center',
-    },
-    userName: {
-        fontSize: 20
+        borderRadius: 6,
+        width: "100%",
+
+
     },
     tileParent: {
         flexDirection: 'row',
@@ -46,9 +67,33 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
 
+    authParent: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        rowGap: 20,
+        flex:1,
+        width: "70%",
+        alignSelf: 'center',
+
+
+    },
+    appName:{
+        fontSize:20,
+        alignSelf:'center'
+    },
+    greeting:{
+        fontSize: 24
+
+
+    },
+    supportLabel:{
+        alignSelf: 'flex-end',
+    },
     scrollView: {
         padding: 10,
-        flex: 1
+
+        flex: 1,
+
 
     },
 });
