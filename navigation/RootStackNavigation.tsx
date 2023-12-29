@@ -3,22 +3,28 @@ import HomeScreen from '../screens/HomeScreen';
 import ProductsScreen from '../screens/ProductsScreen';
 import SalesScreen from '../screens/SalesScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons, Entypo, MaterialIcons, FontAwesome, AntDesign, Feather } from "@expo/vector-icons"
 import SettingsScreen from '../screens/SettingsScreen';
+import LoginScreen from '../screens/LoginScreen';
 export type RootStackNavigationType = {
     Products: { name: string };
     Home: { name: string };
     Settings: { name: string };
     Sales: { name: string };
+    Login: { name: string };
 };
-const Stack = createBottomTabNavigator<RootStackNavigationType>();
+const BottomTab = createBottomTabNavigator<RootStackNavigationType>();
 
-const RootStackNavigation = () => {
+const BottomTabNavigation = () => {
     const iconSize = 24;
     const iconColor = 'black';
+
+
+
+
     return (
-        <Stack.Navigator initialRouteName="Home"
+        <BottomTab.Navigator initialRouteName="Home"
             screenOptions={{
                 tabBarStyle: { marginBottom: 3, padding: 10 },
                 tabBarLabelStyle: { fontSize: 12 },
@@ -27,16 +33,19 @@ const RootStackNavigation = () => {
 
 
         >
-            <Stack.Screen
+
+            <BottomTab.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{
                     title: 'Welcome', tabBarLabel: 'Home',
+                    headerStyle: { display: 'none' },
+
                     tabBarIcon: () => <AntDesign name='home' size={iconSize} color={iconColor} />,
                 }
                 }
             />
-            < Stack.Screen name="Sales"
+            < BottomTab.Screen name="Sales"
 
                 options={{
                     title: 'Sales', tabBarLabel: 'Sales',
@@ -46,7 +55,7 @@ const RootStackNavigation = () => {
                 }
 
                 component={SalesScreen} />
-            < Stack.Screen name="Products"
+            < BottomTab.Screen name="Products"
 
                 options={{
                     title: 'Products', tabBarLabel: 'Products',
@@ -56,7 +65,7 @@ const RootStackNavigation = () => {
                 }
 
                 component={ProductsScreen} />
-            < Stack.Screen name="Settings"
+            < BottomTab.Screen name="Settings"
 
                 options={{
                     title: 'Settings', tabBarLabel: 'Settings',
@@ -66,7 +75,49 @@ const RootStackNavigation = () => {
                 }
 
                 component={SettingsScreen} />
-        </Stack.Navigator>
+        </BottomTab.Navigator>
+    );
+};
+
+const AuthStack = createStackNavigator();
+const RootStackNavigation = () => {
+    const iconSize = 24;
+    const iconColor = 'black';
+
+
+
+
+    return (
+        <AuthStack.Navigator initialRouteName="Login"
+            screenOptions={{
+                headerShown: false
+
+            }}
+
+
+        >
+            <AuthStack.Screen
+                name="Login"
+                component={LoginScreen}
+                options={{
+                    
+
+
+                }
+                }
+            />
+            <AuthStack.Screen
+                name="BottomTab"
+                component={BottomTabNavigation}
+                options={{
+                  
+
+
+                }
+                }
+            />
+
+        </AuthStack.Navigator>
     );
 };
 
