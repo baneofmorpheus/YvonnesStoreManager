@@ -10,7 +10,12 @@ import {
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { enGB,en, registerTranslation } from 'react-native-paper-dates'
 import 'expo-dev-client';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
+
+
+
+GoogleSignin.configure({ webClientId:"874439575137-hmf8pu0e4go2v0vim49tt8tlqsv3539o.apps.googleusercontent.com"});
 registerTranslation('en-GB', enGB)
 registerTranslation('en', en)
 export default function App() {

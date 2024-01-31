@@ -1,0 +1,3 @@
+Build with eas for custom code -  eas build --profile development --platform android
+Run custom code - npx expo start --dev-client
+Run devtools - npm run react-devtools

@@ -2,12 +2,38 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackNavigationType } from '../navigation/RootStackNavigation';
 import { Text, View, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
+import { GoogleSignin, statusCodes,User } from '@react-native-google-signin/google-signin';
 import { Entypo } from "@expo/vector-icons"
 import TileCard from '../components/cards/TileCard';
+import { useState } from 'react';
 
 
 const LoginScreen = () => {
     const navigation = useNavigation<NativeStackNavigationProp<RootStackNavigationType, 'Home'>>();
+    const [userInfo,setUserInfo] = useState<User>()
+    const signInWithGoogle =  async():Promise<void>=>{
+
+        try {
+            await GoogleSignin.hasPlayServices();
+            const userInfo = await GoogleSignin.signIn();
+            console.log('userInfo',userInfo);
+            
+            setUserInfo(userInfo );
+        } catch (error:any) {
+            console.log(error);
+            
+            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                // user cancelled the login flow
+            } else if (error.code === statusCodes.IN_PROGRESS) {
+                // operation (e.g. sign in) is in progress already
+            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+                // play services not available or outdated
+            } else {
+                // some other error happened
+            }
+        }
+
+    }
     return (
         <SafeAreaView style={styles.container} >
             <ScrollView contentContainerStyle={styles.scrollView} >
@@ -17,7 +43,7 @@ const LoginScreen = () => {
                 <View style={styles.authParent}>
                     <Text style={styles.greeting}>Welcome</Text>
 
-                    <TouchableOpacity style={styles.loginOption}>
+                    <TouchableOpacity onPress={signInWithGoogle} style={styles.loginOption}>
 
                         <Text>Login  With Google</Text>
                     </TouchableOpacity>
