@@ -28,7 +28,8 @@ export default (): ExpoConfig => {
                 "backgroundColor": "#ffffff"
             },
             "package": "com.mansa_morpheus.YvonnesStoreManager",
-            "googleServicesFile": process.env.GOOGLE_SERVICES_JSON
+            "googleServicesFile": process.env.EXPO_PUBLIC_GOOGLE_SERVICES_JSON
+            // "googleServicesFile": process.env.GOOGLE_SERVICES_JSON
             // "googleServicesFile": "./google-services.json"
 
         },
