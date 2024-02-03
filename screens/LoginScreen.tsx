@@ -2,26 +2,48 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackNavigationType } from '../navigation/RootStackNavigation';
 import { Text, View, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
-import { GoogleSignin, statusCodes,User } from '@react-native-google-signin/google-signin';
+import { GoogleSignin, statusCodes, User } from '@react-native-google-signin/google-signin';
 import { Entypo } from "@expo/vector-icons"
+import type { RootState } from '../store'
 import TileCard from '../components/cards/TileCard';
+import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react';
+import { loginUser } from '../store/reducers/authentication';
+import { useEffect } from 'react';
 
 
 const LoginScreen = () => {
-    const navigation = useNavigation<NativeStackNavigationProp<RootStackNavigationType, 'Home'>>();
-    const [userInfo,setUserInfo] = useState<User>()
-    const signInWithGoogle =  async():Promise<void>=>{
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackNavigationType>>();
+    const user = useSelector((state: RootState) => state.authentication.user)
+    const dispatch = useDispatch()
+
+
+
+    useEffect(() => {
+
+        if (!!user && !!user.idToken) {
+            navigation.navigate('BottomTab', { screen: 'Home' })
+
+        }
+
+    }, [])
+
+
+
+    const signInWithGoogle = async (): Promise<void> => {
 
         try {
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
-            console.log('userInfo',userInfo);
-            
-            setUserInfo(userInfo );
-        } catch (error:any) {
+            console.log('userInfo', userInfo);
+
+            dispatch(loginUser(userInfo))
+            navigation.navigate('BottomTab', { screen: 'Home' })
+
+
+        } catch (error: any) {
             console.log(error);
-            
+
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                 // user cancelled the login flow
             } else if (error.code === statusCodes.IN_PROGRESS) {
@@ -37,7 +59,7 @@ const LoginScreen = () => {
     return (
         <SafeAreaView style={styles.container} >
             <ScrollView contentContainerStyle={styles.scrollView} >
-                
+
                 <Text style={styles.appName}>Yvonne's Store Management</Text>
 
                 <View style={styles.authParent}>
@@ -47,7 +69,7 @@ const LoginScreen = () => {
 
                         <Text>Login  With Google</Text>
                     </TouchableOpacity>
-                    
+
                     <TouchableOpacity style={styles.supportLabel}>
 
                         <Text>Need Help?</Text>
@@ -55,8 +77,8 @@ const LoginScreen = () => {
 
                 </View>
 
-                
-       
+
+
             </ScrollView>
         </SafeAreaView>
 
@@ -97,22 +119,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         rowGap: 20,
-        flex:1,
+        flex: 1,
         width: "70%",
         alignSelf: 'center',
 
 
     },
-    appName:{
-        fontSize:20,
-        alignSelf:'center'
+    appName: {
+        fontSize: 20,
+        alignSelf: 'center'
     },
-    greeting:{
+    greeting: {
         fontSize: 24
 
 
     },
-    supportLabel:{
+    supportLabel: {
         alignSelf: 'flex-end',
     },
     scrollView: {

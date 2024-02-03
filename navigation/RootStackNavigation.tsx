@@ -8,13 +8,17 @@ import { Ionicons, Entypo, MaterialIcons, FontAwesome, AntDesign, Feather } from
 import SettingsScreen from '../screens/SettingsScreen';
 import LoginScreen from '../screens/LoginScreen';
 export type RootStackNavigationType = {
+    BottomTab: { screen: keyof BottomStackNavigationType };
+    Login: undefined;
+};
+export type BottomStackNavigationType = {
     Products: { name: string };
-    Home: { name: string };
+    Home: undefined;
     Settings: { name: string };
     Sales: { name: string };
     Login: { name: string };
 };
-const BottomTab = createBottomTabNavigator<RootStackNavigationType>();
+const BottomTab = createBottomTabNavigator<BottomStackNavigationType>();
 
 const BottomTabNavigation = () => {
     const iconSize = 24;
@@ -79,7 +83,7 @@ const BottomTabNavigation = () => {
     );
 };
 
-const AuthStack = createStackNavigator();
+const AuthStack = createStackNavigator<RootStackNavigationType>();
 const RootStackNavigation = () => {
     const iconSize = 24;
     const iconColor = 'black';
@@ -100,7 +104,7 @@ const RootStackNavigation = () => {
                 name="Login"
                 component={LoginScreen}
                 options={{
-                    
+
 
 
                 }
@@ -110,7 +114,7 @@ const RootStackNavigation = () => {
                 name="BottomTab"
                 component={BottomTabNavigation}
                 options={{
-                  
+
 
 
                 }
