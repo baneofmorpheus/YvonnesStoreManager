@@ -14,7 +14,7 @@ import SafeArea from '../components/utility/SafeArea';
 
 
 
-const ProductsScreen = () => {
+const SupplierScreen = () => {
     const navigation = useNavigation<NativeStackNavigationProp<RootStackNavigationType>>();
     const [page, setPage] = React.useState<number>(0);
     const [numberOfItemsPerPageList] = React.useState([10, 20, 40]);
@@ -97,12 +97,12 @@ const ProductsScreen = () => {
                     <View style={styles.analytics}>
 
                         <View style={styles.analyticsChild}>
-                            <Text style={styles.analyticsChildLabel}>Total Products</Text>
+                            <Text style={styles.analyticsChildLabel}>Total Suppliers</Text>
                             <Text style={styles.analyticsChildNumber}>500</Text>
                         </View>
                         <View style={styles.divider}></View>
                         <View style={styles.analyticsChild}>
-                            <Text style={styles.analyticsChildLabel}>No. of  Low Stock</Text>
+                            <Text style={styles.analyticsChildLabel}>Owed Suppliers</Text>
                             <Text style={styles.analyticsChildNumber}>300</Text>
                         </View>
                     </View>
@@ -270,4 +270,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ProductsScreen;
+export default SupplierScreen;

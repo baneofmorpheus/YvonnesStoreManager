@@ -53,6 +53,7 @@ const HomeScreen = () => {
                             () =>
                                 navigation.navigate('BottomTab', { screen: 'Products' })
                         }
+                        style={styles.tileChild}
 
 
                     />
@@ -70,6 +71,8 @@ const HomeScreen = () => {
                             () =>
                                 navigation.navigate('BottomTab', { screen: 'Sales' })
                         }
+                        style={styles.tileChild}
+
 
 
                     />
@@ -87,6 +90,46 @@ const HomeScreen = () => {
                             () =>
                                 navigation.navigate('BottomTab', { screen: 'Sales' })
                         }
+                        style={styles.tileChild}
+
+
+
+                    />
+                    <TileCard title='Suppliers'
+                        dataCount={30}
+                        countLabel="Total Suppliers."
+                        icon={{
+                            name: "users",
+                            component: 'Feather',
+                            style: { marginLeft: -5 },
+
+                        }
+                        }
+                        buttonCallBack={
+                            () =>
+                                navigation.navigate('BottomTab', { screen: 'Supplier' })
+                        }
+                        style={styles.tileChild}
+
+
+
+                    />
+                    <TileCard title='Purchases'
+                        dataCount={30}
+                        countLabel="Total Suppliers."
+                        icon={{
+                            name: "users",
+                            component: 'Feather',
+                            style: { marginLeft: -5 },
+
+                        }
+                        }
+                        buttonCallBack={
+                            () =>
+                                navigation.navigate('BottomTab', { screen: 'Sales' })
+                        }
+                        style={styles.tileChild}
+
 
 
                     />
@@ -128,7 +171,7 @@ const styles = StyleSheet.create({
 
     scrollView: {
         padding: 10,
-        flex: 1
+        flexGrow: 1
 
     },
 });

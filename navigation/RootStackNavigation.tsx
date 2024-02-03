@@ -7,16 +7,17 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons, Entypo, MaterialIcons, FontAwesome, AntDesign, Feather } from "@expo/vector-icons"
 import SettingsScreen from '../screens/SettingsScreen';
 import LoginScreen from '../screens/LoginScreen';
+import SupplierScreen from '../screens/SupplierScreen';
 export type RootStackNavigationType = {
     BottomTab: { screen: keyof BottomStackNavigationType };
     Login: undefined;
 };
 export type BottomStackNavigationType = {
-    Products: { name: string };
+    Products: undefined;
     Home: undefined;
-    Settings: { name: string };
-    Sales: { name: string };
-    Login: { name: string };
+    Settings: undefined;
+    Sales: undefined;
+    Supplier: undefined;
 };
 const BottomTab = createBottomTabNavigator<BottomStackNavigationType>();
 
@@ -43,7 +44,6 @@ const BottomTabNavigation = () => {
                 component={HomeScreen}
                 options={{
                     title: 'Welcome', tabBarLabel: 'Home',
-                    headerStyle: { display: 'none' },
 
                     tabBarIcon: () => <AntDesign name='home' size={iconSize} color={iconColor} />,
                 }
@@ -69,6 +69,17 @@ const BottomTabNavigation = () => {
                 }
 
                 component={ProductsScreen} />
+            < BottomTab.Screen name="Supplier"
+
+                options={{
+                    title: 'Supplier', tabBarLabel: 'Supplier',
+                    tabBarButton: (props) => null,
+
+                    tabBarIcon: () => <Feather name="box" size={iconSize} color={iconColor} />,
+                }
+                }
+
+                component={SupplierScreen} />
             < BottomTab.Screen name="Settings"
 
                 options={{
@@ -110,6 +121,7 @@ const RootStackNavigation = () => {
                 }
                 }
             />
+
             <AuthStack.Screen
                 name="BottomTab"
                 component={BottomTabNavigation}

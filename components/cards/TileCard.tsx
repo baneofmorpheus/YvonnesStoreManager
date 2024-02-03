@@ -17,7 +17,7 @@ interface TitleProps {
 }
 
 const TileCard: React.FC<TitleProps> = ({ title, dataCount, countLabel, icon, style, buttonCallBack }) => {
-    const navigation = useNavigation<NativeStackNavigationProp<RootStackNavigationType, 'Home'>>();
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackNavigationType>>();
     return (
         <View style={{ ...styles.tileItem, ...style as object }} >
 
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     tileItem: {
         width: '48%',
         borderColor: 'black',
-        height: '30%',
+        height: 200,
         borderWidth: 2,
         borderRadius: 10,
         justifyContent: 'space-between',
