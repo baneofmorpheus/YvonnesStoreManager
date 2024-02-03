@@ -18,6 +18,7 @@ import { Provider } from 'react-redux';
 import store from "./store/index"
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistedStore } from './store/index';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 GoogleSignin.configure({
   webClientId: "874439575137-hmf8pu0e4go2v0vim49tt8tlqsv3539o.apps.googleusercontent.com",
@@ -32,9 +33,11 @@ export default function App() {
         <BottomSheetModalProvider>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistedStore}>
+              <SafeAreaProvider>
               <NavigationContainer>
                 <RootStackNavigation />
               </NavigationContainer>
+              </SafeAreaProvider>
             </PersistGate>
           </Provider>
         </BottomSheetModalProvider>

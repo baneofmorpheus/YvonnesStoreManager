@@ -1,15 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackNavigationType } from '../navigation/RootStackNavigation';
-import { Text, View, StyleSheet, SafeAreaView,  ScrollView } from 'react-native';
+import { Text, View, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { Entypo } from "@expo/vector-icons"
 import TileCard from '../components/cards/TileCard';
-
+import SafeArea from '../components/utility/SafeArea';
 
 const HomeScreen = () => {
-    const navigation = useNavigation<NativeStackNavigationProp<RootStackNavigationType, 'Home'>>();
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackNavigationType>>();
     return (
-        <SafeAreaView style={styles.container} >
+        <SafeArea style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollView} >
                 <View style={styles.greetingContainer}>
                     <View style={styles.greetingIconContainer}>
@@ -32,7 +32,7 @@ const HomeScreen = () => {
                         }
                         buttonCallBack={
                             () =>
-                                navigation.navigate('Sales', { name: 'Janeo' })
+                                navigation.navigate('BottomTab', { screen: 'Sales' })
                         }
 
                         style={styles.tileChild}
@@ -51,7 +51,7 @@ const HomeScreen = () => {
                         }
                         buttonCallBack={
                             () =>
-                                navigation.navigate('Sales', { name: 'Janeo' })
+                                navigation.navigate('BottomTab', { screen: 'Products' })
                         }
 
 
@@ -68,7 +68,7 @@ const HomeScreen = () => {
                         }
                         buttonCallBack={
                             () =>
-                                navigation.navigate('Sales', { name: 'Janeo' })
+                                navigation.navigate('BottomTab', { screen: 'Sales' })
                         }
 
 
@@ -85,7 +85,7 @@ const HomeScreen = () => {
                         }
                         buttonCallBack={
                             () =>
-                                navigation.navigate('Sales', { name: 'Janeo' })
+                                navigation.navigate('BottomTab', { screen: 'Sales' })
                         }
 
 
@@ -93,7 +93,7 @@ const HomeScreen = () => {
 
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </SafeArea>
 
     );
 };
