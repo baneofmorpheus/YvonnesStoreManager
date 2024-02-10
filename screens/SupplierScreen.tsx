@@ -11,11 +11,20 @@ import {
 } from '@gorhom/bottom-sheet';
 import { BottomSheetDefaultBackdropProps } from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types';
 import SafeArea from '../components/utility/SafeArea';
+import { useSelector, useDispatch } from 'react-redux'
+import type { RootState } from '../store'
 
+import { useEffect } from 'react';
+import { getCurrentStoreData } from '../services/StoreService';
+import { SupplierInterface } from '../types/store';
+import { updateCurrentStoreData } from '../store/reducers/store';
 
 
 const SupplierScreen = () => {
     const navigation = useNavigation<NativeStackNavigationProp<RootStackNavigationType>>();
+    const user = useSelector((state: RootState) => state.authentication.user)
+    const dispatch = useDispatch()
+
     const [page, setPage] = React.useState<number>(0);
     const [numberOfItemsPerPageList] = React.useState([10, 20, 40]);
     const [itemsPerPage, onItemsPerPageChange] = React.useState(
@@ -25,7 +34,7 @@ const SupplierScreen = () => {
     const dateFilterBottomSheetRef = React.useRef<BottomSheetModal>(null);
     const snapPoints = React.useMemo(() => ['40%'], []);
     const [filterTextInput, setFilterTextInput] = React.useState<string>()
-
+    const [suppliers, setSuppliers] = React.useState<SupplierInterface[]>([]);
     // callbacks
     const handlePresentModalPress = React.useCallback(() => {
         dateFilterBottomSheetRef.current?.present();
@@ -33,49 +42,15 @@ const SupplierScreen = () => {
     const handleSheetChanges = React.useCallback((index: number) => {
         // console.log('handleSheetChanges', index);
     }, []);
+    let storeData = useSelector((state: RootState) => state.store.currentStore)
 
 
-    const [items] = React.useState([
-        {
-            key: 1,
-            name: '112',
-            calories: 356,
-            fat: 16,
-        },
-        {
-            key: 2,
-            name: '112',
-            calories: 262,
-            fat: 16,
-        },
-        {
-            key: 3,
-            name: '112',
-            calories: 159,
-            fat: 6,
-        },
-        {
-            key: 4,
-            name: '112',
-            calories: 305,
-            fat: 3.7,
-        },
-        {
-            key: 5,
-            name: '112',
-            calories: 159,
-            fat: 6,
-        },
-        {
-            key: 6,
-            name: '112',
-            calories: 305,
-            fat: 3.7,
-        },
-    ]);
+
+
+
 
     const from = page * itemsPerPage;
-    const to = Math.min((page + 1) * itemsPerPage, items.length);
+    const to = Math.min((page + 1) * itemsPerPage, suppliers.length);
     const renderBackdrop = React.useCallback(
         (props: React.JSX.IntrinsicAttributes & BottomSheetDefaultBackdropProps) => (
             <BottomSheetBackdrop
@@ -87,7 +62,42 @@ const SupplierScreen = () => {
         []
     );
 
-    React.useEffect(() => {
+
+    const handleGetAllSuppliers = async () => {
+        try {
+            if (!storeData) {
+
+                storeData = await getCurrentStoreData(user!.user!.id)
+            }
+
+            if (!storeData) {
+                throw new Error('No store data set')
+            }
+            setSuppliers(storeData.suppliers)
+
+            dispatch(updateCurrentStoreData(storeData))
+
+            console.log('suppliersx', storeData);
+
+        } catch (error) {
+            console.log('error handX');
+
+            console.log(error);
+
+
+        }
+
+
+
+    }
+
+
+    useEffect(() => {
+        handleGetAllSuppliers()
+
+    }, []);
+
+    useEffect(() => {
         setPage(0);
     }, [itemsPerPage]);
     return (
@@ -98,12 +108,12 @@ const SupplierScreen = () => {
 
                         <View style={styles.analyticsChild}>
                             <Text style={styles.analyticsChildLabel}>Total Suppliers</Text>
-                            <Text style={styles.analyticsChildNumber}>500</Text>
+                            <Text style={styles.analyticsChildNumber}>{suppliers.length}</Text>
                         </View>
                         <View style={styles.divider}></View>
                         <View style={styles.analyticsChild}>
-                            <Text style={styles.analyticsChildLabel}>Owed Suppliers</Text>
-                            <Text style={styles.analyticsChildNumber}>300</Text>
+                            <Text style={styles.analyticsChildLabel}>Store</Text>
+                            <Text style={styles.analyticsChildNumber}>{storeData?.name}</Text>
                         </View>
                     </View>
                     <TouchableOpacity
@@ -113,26 +123,24 @@ const SupplierScreen = () => {
                     </TouchableOpacity>
                     <DataTable>
                         <DataTable.Header >
-                            <DataTable.Title textStyle={styles.salesTableHeaderText}>Code.</DataTable.Title>
-                            <DataTable.Title textStyle={styles.salesTableHeaderText} numeric>Name</DataTable.Title>
-                            <DataTable.Title textStyle={styles.salesTableHeaderText} numeric>Stock Available</DataTable.Title>
+                            <DataTable.Title textStyle={styles.salesTableHeaderText}>Name.</DataTable.Title>
+                            <DataTable.Title textStyle={styles.salesTableHeaderText} numeric>Phone</DataTable.Title>
                         </DataTable.Header>
 
-                        {items.slice(from, to).map((item) => (
-                            <DataTable.Row key={item.key} onPress={() => {
+                        {suppliers.slice(from, to).map((supplier, index) => (
+                            <DataTable.Row key={index} onPress={() => {
                                 // console.log(item);
                             }}>
-                                <DataTable.Cell>{item.name}</DataTable.Cell>
-                                <DataTable.Cell numeric>{item.calories}</DataTable.Cell>
-                                <DataTable.Cell numeric>{item.fat}</DataTable.Cell>
+                                <DataTable.Cell>{supplier.name}</DataTable.Cell>
+                                <DataTable.Cell numeric>{supplier.phoneNumber}</DataTable.Cell>
                             </DataTable.Row>
                         ))}
 
                         <DataTable.Pagination
                             page={page}
-                            numberOfPages={Math.ceil(items.length / itemsPerPage)}
+                            numberOfPages={Math.ceil(suppliers.length / itemsPerPage)}
                             onPageChange={(page) => setPage(page)}
-                            label={`${from + 1}-${to} of ${items.length}`}
+                            label={`${from + 1}-${to} of ${suppliers.length}`}
                             numberOfItemsPerPageList={numberOfItemsPerPageList}
                             numberOfItemsPerPage={itemsPerPage}
                             onItemsPerPageChange={onItemsPerPageChange}
