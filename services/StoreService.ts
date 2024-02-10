@@ -1,5 +1,7 @@
 import firestore from '@react-native-firebase/firestore';
 import { StoreInterface } from '../types/store';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 
 const storesCollectionRef = firestore().collection('stores');
@@ -7,7 +9,10 @@ const storesCollectionRef = firestore().collection('stores');
 
 export const getCurrentStoreData = async (userId: string) => {
 
+    let selectorData = useSelector((state: RootState) => state.store.currentStore)
+
     console.log('running ' + userId);
+    console.log('runningX ' + selectorData);
     
     let storeData: undefined | StoreInterface;
 

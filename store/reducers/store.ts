@@ -18,7 +18,8 @@ export const storeSlice = createSlice({
     reducers: {
 
         updateCurrentStoreData: (state, action: PayloadAction<StoreInterface>) => {
-            state.currentStore = action.payload
+            return { ...state, currentStore: action.payload }
+
         },
 
     },

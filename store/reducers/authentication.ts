@@ -4,7 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { GoogleSignin, statusCodes, User } from '@react-native-google-signin/google-signin';
 
 export interface AuthenticationState {
-    user: User| undefined;
+    user: User | undefined;
 }
 
 const initialState: AuthenticationState = {
@@ -15,17 +15,18 @@ export const authenticationSlice = createSlice({
     name: 'authentication',
     initialState,
     reducers: {
-      
+
         loginUser: (state, action: PayloadAction<User>) => {
-            state.user = action.payload
+            return { ...state, user: action.payload }
         },
         logOutUser: (state) => {
-            state.user = undefined
+            return { ...state, user: undefined }
+
         },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const {logOutUser, loginUser } = authenticationSlice.actions
+export const { logOutUser, loginUser } = authenticationSlice.actions
 
 export default authenticationSlice.reducer
