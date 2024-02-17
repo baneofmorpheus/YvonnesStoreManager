@@ -99,7 +99,7 @@ const HomeScreen = () => {
                         dataCount={30}
                         countLabel="Total Suppliers."
                         icon={{
-                            name: "users",
+                            name: "truck",
                             component: 'Feather',
                             style: { marginLeft: -5 },
 
@@ -118,7 +118,7 @@ const HomeScreen = () => {
                         dataCount={30}
                         countLabel="Total Suppliers."
                         icon={{
-                            name: "users",
+                            name: "shopping-bag",
                             component: 'Feather',
                             style: { marginLeft: -5 },
 

@@ -11,9 +11,10 @@ import {
 } from '@gorhom/bottom-sheet';
 import { BottomSheetDefaultBackdropProps } from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types';
 import { DatePickerInput } from 'react-native-paper-dates';
+import SafeArea from '../components/utility/SafeArea';
 
 const SalesScreen = () => {
-    const navigation = useNavigation<NativeStackNavigationProp<RootStackNavigationType, 'Products'>>();
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackNavigationType>>();
     const [page, setPage] = React.useState<number>(0);
     const [numberOfItemsPerPageList] = React.useState([10, 20, 40]);
     const [itemsPerPage, onItemsPerPageChange] = React.useState(
@@ -89,7 +90,7 @@ const SalesScreen = () => {
     }, [itemsPerPage]);
     return (
         <BottomSheetModalProvider>
-            <SafeAreaView style={styles.container}>
+            <SafeArea style={styles.container}>
                 <ScrollView contentContainerStyle={styles.scrollView} >
                     <View style={styles.analytics}>
 
@@ -185,7 +186,7 @@ const SalesScreen = () => {
 
                 </ScrollView>
 
-            </SafeAreaView>
+            </SafeArea>
         </BottomSheetModalProvider>
 
     );

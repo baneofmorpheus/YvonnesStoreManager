@@ -105,16 +105,19 @@ const SupplierScreen = () => {
             <BottomSheetModalProvider>
                 <ScrollView contentContainerStyle={styles.scrollView} >
                     <View style={styles.analytics}>
+                        <View style={styles.analyticsChild}>
+                            <Text style={styles.analyticsChildLabel}>Store</Text>
+                            <Text style={styles.analyticsChildNumber}>{storeData?.name}</Text>
+                        </View>
+                        
+                        <View style={styles.divider}></View>
+
 
                         <View style={styles.analyticsChild}>
                             <Text style={styles.analyticsChildLabel}>Total Suppliers</Text>
                             <Text style={styles.analyticsChildNumber}>{suppliers.length}</Text>
                         </View>
-                        <View style={styles.divider}></View>
-                        <View style={styles.analyticsChild}>
-                            <Text style={styles.analyticsChildLabel}>Store</Text>
-                            <Text style={styles.analyticsChildNumber}>{storeData?.name}</Text>
-                        </View>
+
                     </View>
                     <TouchableOpacity
                         onPress={handlePresentModalPress}

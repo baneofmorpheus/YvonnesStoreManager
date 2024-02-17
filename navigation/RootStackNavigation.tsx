@@ -2,12 +2,13 @@ import * as React from 'react';
 import HomeScreen from '../screens/HomeScreen';
 import ProductsScreen from '../screens/ProductsScreen';
 import SalesScreen from '../screens/SalesScreen';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator, BottomTabHeaderProps } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons, Entypo, MaterialIcons, FontAwesome, AntDesign, Feather } from "@expo/vector-icons"
 import SettingsScreen from '../screens/SettingsScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SupplierScreen from '../screens/SupplierScreen';
+import Header from '../components/utility/Header';
 export type RootStackNavigationType = {
     BottomTab: { screen: keyof BottomStackNavigationType };
     Login: undefined;
@@ -33,7 +34,11 @@ const BottomTabNavigation = () => {
             screenOptions={{
                 tabBarStyle: { marginBottom: 3, padding: 10 },
                 tabBarLabelStyle: { fontSize: 12 },
-                headerShown: false
+                // header: (props) => <Header {...props} />,
+                // headerTitleStyle: { fontWeight: '900', fontSize: 40 },
+                // headerTitleAlign: 'center',
+                headerStyle: { backgroundColor: '#f2f2f2' },
+                // headerShown: false,
             }}
 
 
@@ -43,7 +48,8 @@ const BottomTabNavigation = () => {
                 name="Home"
                 component={HomeScreen}
                 options={{
-                    title: 'Welcome', tabBarLabel: 'Home',
+                    title: 'Home', tabBarLabel: 'Home',
+                    headerShown: false,
 
                     tabBarIcon: () => <AntDesign name='home' size={iconSize} color={iconColor} />,
                 }
